@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background-image: url("image.jpg");
+  background-image: url("image.JPG");
 }
 
 .container {
@@ -9,4 +9,10 @@ body {
   align-self: center;
   text-align: center;
   font-size: 30px;
+}
+
+button,
+input {
+  font-family: serif;
+  color: blue;
 }
