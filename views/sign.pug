@@ -1,0 +1,46 @@
+ 
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
+    link(rel='stylesheet', href='/styles.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
+
+    style
+      include ../styles/styles.css
+  body
+  .row.yellow.lighten-5
+    .container
+      .col.s12.m2
+        .col.s5.m12
+          .col.s2.m12
+        .col.s2.m12
+      .col.s2.m12
+        h1= title
+        .row
+        .row
+        .row
+
+
+        
+    .container.yellow.lighten-4.hoverable
+      .row
+        h5 Sign Up
+          br
+          br
+          form(method="POST" action="/posts/sign")
+            .form-group.input-field
+              label(for='logname') Username
+              input#logname.form-control(type='text', maxlength='15', name='signupuser')
+            .form-group.input-field
+              label(for='pw') Password
+              input#password.form-control(type='password',  maxlength='15', name='signuppassword')
+            button.btn.grey(type='submit') Sign Up
+
+        .row
+        .row
+
+    p © Ella Toimela 2020
