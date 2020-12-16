@@ -118,6 +118,7 @@ router.post("/login", sanitizeBody("*").trim().escape(), function (
   } else {
     res.redirect("/posts");
     console.log(user + " logged in");
+    console.log("Ella on paras");
   }
 });
 
