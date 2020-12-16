@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
-  background-image: url("image.JPG");
+  background-image: url("/image.JPG");
+  text-align: center;
 }
 
 .container {

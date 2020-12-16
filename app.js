@@ -1,5 +1,4 @@
 var express = require("express");
-var app = express();
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var createError = require("http-errors");
@@ -7,12 +6,14 @@ var createError = require("http-errors");
 //The Path module provides a way of working with directories and file paths.
 var path = require("path");
 
+var app = express();
+
 // Include external files
 var indexRouter = require("./src/index");
 var signRouter = require("./src/sign");
 var postRouter = require("./src/posts");
 
-// view engine setup
+// view engine setup  - default
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
