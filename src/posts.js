@@ -27,7 +27,7 @@ router.post("/create", sanitizeBody("*").trim().escape(), function (
   next
 ) {
   var date = new Date();
-  var hour = date.getHours() + 3;
+  var hour = date.getHours() + 2;
   var minute = date.getMinutes();
   var second = date.getSeconds();
   var day = date.getDate();
@@ -68,7 +68,7 @@ router.post("/create", sanitizeBody("*").trim().escape(), function (
   console.log("Time: " + time, post_date);
 
   if (content.length <= 200) {
-    if (content && logged !== "") {
+    if (content !== "") {
       req.app.get("poststore").unshift({
         author: logged,
         content: content,
