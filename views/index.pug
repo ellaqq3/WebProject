@@ -8,11 +8,10 @@ html
     link(rel='stylesheet', href='styles.css')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
 
-    style
-      include ../styles/styles.css
+     style
+      include ../public/styles.css
 
   body
-  .row.yellow.lighten-5
     .container
       .col.s12.m2
         .col.s5.m12
@@ -21,9 +20,14 @@ html
       .col.s2.m12
         h1= title
         h6 Log in or sign up to read what your friends want to say!
+          br
+          br
+          br
+          br
+          br
 
 
-  .container.yellow.lighten-4.hoverable
+  .container.yellow.lighten-5.hoverable
     .row
     h5 Log in
     h6 In case you already have an account
@@ -39,20 +43,20 @@ html
           label(for='pw') Password
           .row
           .row
-        button.btn.grey(type='submit' name='loginbtn') Log In
+        button.btn.grey.hoverable(type='submit' name='loginbtn') Log In
       .row
     .row
     .row
 
   .row
-  .container.yellow.lighten-4.hoverable
+  .container.yellow.lighten-5.hoverable
     .row
     h5 Sign Up
     h6 If you are new in MiniBlogger
       br
       br
       form(method="POST" action="/getin")
-        button.btn.grey(type='submit' name='action') Sign Up
+        button.btn.grey.hoverable(type='submit' name='action') Sign Up
     .row
     .row
 

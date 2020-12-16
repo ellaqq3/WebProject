@@ -1,17 +1,17 @@
-// Required libraries
+// Libraries
 var express = require("express");
 var router = express.Router();
-var loggeduser;
+var logged;
 
 // Good validation documentation available at https://express-validator.github.io/docs/
 const { sanitizeBody } = require("express-validator");
 
-// Get posts listing
+// Get posts list
 router.get("/", function (req, res, next) {
   // Retreiving the posts from the global var
   var data = req.app.get("poststore");
 
-  // Just send the array of objects to the browser
+  // Send the array of objects to the browser
   res.render("posts", {
     title: "Blogging site",
     post_list: data
@@ -26,8 +26,6 @@ router.post("/create", sanitizeBody("*").trim().escape(), function (
   res,
   next
 ) {
-  var local_content = req.body.content;
-  var local_author = loggeduser;
   var date = new Date();
   var hour = date.getHours() + 3;
   var minute = date.getMinutes();
@@ -35,12 +33,16 @@ router.post("/create", sanitizeBody("*").trim().escape(), function (
   var day = date.getDate();
   var month = date.getMonth() + 1;
   var year = date.getFullYear();
-  var tunti = String(hour);
+  var checked = req.body.checkbox;
 
-  if (tunti === "24") {
-    hour = "0 §0";
+  var hours = String(hour);
+
+  var content = req.body.content;
+
+  if (hours === "24") {
+    hour = "00";
   }
-  if (tunti === "25") {
+  if (hours === "25") {
     hour = "01";
   }
   var minuutti = String(minute);
@@ -49,26 +51,29 @@ router.post("/create", sanitizeBody("*").trim().escape(), function (
     minute = "0" + minuutti;
   }
 
-  var sekuntti = String(second);
+  var seconds = String(second);
 
-  if (sekuntti.length === 1) {
-    second = "0" + sekuntti;
+  if (seconds.length === 1) {
+    second = "0" + seconds;
   }
 
   var time = hour + ":" + minute;
-  var date1 = day + "." + month + "." + year;
+  var post_date = day + "." + month + "." + year;
 
-  console.log("We got content: " + local_content);
-  console.log("from author: " + local_author);
-  console.log("Time: " + time, date1);
+  if (checked === "YES") {
+  }
 
-  if (local_content.length <= 120) {
-    if (local_content && local_author !== "") {
+  console.log("Content: " + content);
+  console.log("Author: " + logged);
+  console.log("Time: " + time, post_date);
+
+  if (content.length <= 200) {
+    if (content && logged !== "") {
       req.app.get("poststore").unshift({
-        author: local_author,
-        content: local_content,
+        author: logged,
+        content: content,
         time: time,
-        date: date1
+        date: post_date
       });
       console.log("post added!");
 
@@ -93,26 +98,26 @@ router.post("/login", sanitizeBody("*").trim().escape(), function (
   next
 ) {
   var users = req.app.get("userstore");
-  var local_user = req.body.logname;
-  var local_password = req.body.pw;
+  var user = req.body.logname;
+  var password = req.body.pw;
   var found = 0;
 
   for (var i = 0; i < users.length; i++) {
     console.log(users[i].user);
-    if (users[i].user === local_user) {
-      if (users[i].pass === local_password) {
-        loggeduser = users[i].user;
+    if (users[i].user === user) {
+      if (users[i].pass === password) {
+        logged = users[i].user;
         found++;
       }
     }
   }
 
   if (found === 0) {
-    console.log("Username or password is incorrect.");
+    console.log("Incorrect username or password");
     res.redirect("/");
   } else {
     res.redirect("/posts");
-    console.log(local_user + " logged in");
+    console.log(user + " logged in");
   }
 });
 
@@ -121,18 +126,18 @@ router.post("/sign", sanitizeBody("*").trim().escape(), function (
   res,
   next
 ) {
-  var local_user = req.body.signupuser;
-  var local_password = req.body.signuppassword;
+  var user = req.body.signupuser;
+  var password = req.body.signuppassword;
 
-  if (local_user && local_password !== "") {
-    console.log("New user: " + local_user + " signed up.");
+  if (user && password !== "") {
+    console.log("New user: " + user + " signed up.");
     req.app.get("userstore").push({
-      user: local_user,
-      pass: local_password
+      user: user,
+      pass: password
     });
     res.redirect("/");
   } else {
-    console.log("Not all the fields were filled.");
+    console.log("There were empty fields");
     res.redirect("/sign");
   }
 });

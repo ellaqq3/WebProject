@@ -5,30 +5,32 @@ html
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css')
-    link(rel='stylesheet', href='/styles.css')
+    link(rel='stylesheet', href='styles.css')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
 
     style
-      include ../styles/styles.css
+      include ../public/styles.css
 
-  body
-  .row.yellow.lighten-5
-    .container
-      .col.s12.m2
-        .col.s5.m12
-          .col.s2.m12
+body
+  .container
+    .col.s12.m2
+      .col.s5.m12
         .col.s2.m12
       .col.s2.m12
-        h3= title
-        h6 Here you can post and read posts
-          br
-          br
+    .col.s2.m12
+      h1= title
+      h6 Here you can post and read posts
+        br
+        br
+        br
+        br
+        br
 
 
-  .container.yellow.lighten-4.hoverable
+  .container.yellow.lighten-5.hoverable
     .row
     h5 Write a new post
-    h6 Character limit: 200
+    h6 Character limit is 200
       br
       br
       form(method='POST' action='/posts/create')
@@ -38,21 +40,27 @@ html
         button.btn.grey.waves-effect.waves-light(type='submit' name='action') Post
         .row
         .row
-        .row.row
+        .row
+    
 
-  .container.yellow.lighten-4.hoverable
+  .container.yellow.lighten-5.hoverable
     .row
     h5 Post Wall
       br
       br
       each post in post_list
-        .col.s8.m6.yellow.lighten-4
-          p.left-align #{post.author}: #{post.content} - #{post.time} - #{post.date}
+        .col.s8.m6.yellow.lighten-5
+          h6.left-align #{post.author}: #{post.content} - #{post.time} - #{post.date}
         .row
       else
-          p(style=" color: #e0e0e0 ") No post on the Post Wall
+          p(style=" color: #e0e0e0 ") No posts on the Post Wall
           .row
           .row
+
+  .row
+      form(method="POST" action="/posts/logout")
+          button.btn.grey.waves-effect.waves-light(type='submit' name='action') Logout
+
     
     
   p © Ella Toimela 2020
