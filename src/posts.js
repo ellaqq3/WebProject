@@ -33,7 +33,6 @@ router.post("/create", sanitizeBody("*").trim().escape(), function (
   var day = date.getDate();
   var month = date.getMonth() + 1;
   var year = date.getFullYear();
-  var checked = req.body.checkbox;
 
   var hours = String(hour);
 
@@ -59,9 +58,6 @@ router.post("/create", sanitizeBody("*").trim().escape(), function (
 
   var time = hour + ":" + minute;
   var post_date = day + "." + month + "." + year;
-
-  if (checked === "YES") {
-  }
 
   console.log("Content: " + content);
   console.log("Author: " + logged);
